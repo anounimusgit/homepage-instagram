@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prévia Instagram - anatomaselli</title>
+  <style>
+    :root{
+      --bg:#000;
+      --panel:#05080c;
+      --text:#f5f5f5;
+      --muted:#a8a8a8;
+      --button:#262a30;
+      --button-hover:#343941;
+      --line:#1f242b;
+      --green:#9be22d;
+      --blue:#0095f6;
+      --tile:url('/mnt/data/a_clean_high_resolution_mockup_promo_image_of_an.png');
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:var(--bg);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    .app{display:flex;min-height:100vh;background:#000}
+    .sidebar{
+      width:245px;
+      border-right:1px solid var(--line);
+      padding:28px 16px 22px;
+      position:fixed;left:0;top:0;bottom:0;
+      background:#000;
+      display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .brand{font-family:cursive;font-size:28px;margin:0 0 34px 10px;font-weight:600}
+    .nav{display:grid;gap:8px}
+    .nav a,.more{
+      color:#fff;text-decoration:none;display:flex;align-items:center;gap:16px;
+      padding:12px 10px;border-radius:10px;font-size:16px;
+    }
+    .nav a:hover,.more:hover{background:#121212}
+    .ico{width:25px;height:25px;display:grid;place-items:center;font-size:25px;line-height:1}
+    .avatar-mini{
+      width:25px;height:25px;border-radius:50%;
+      background:linear-gradient(135deg,#f7cf68,#b15cff);
+      display:grid;place-items:center;font-size:12px;font-weight:800;overflow:hidden;
+    }
+    .main{margin-left:245px;width:calc(100% - 245px);padding:58px 0 80px}
+    .profile{max-width:935px;margin:0 auto}
+    .profile-top{display:grid;grid-template-columns:170px 1fr;gap:56px;align-items:start;margin-bottom:38px}
+    .photo{
+      width:170px;height:170px;border-radius:50%;
+      background:#0b1114;
+      border:4px solid #fff;
+      display:grid;place-items:center;
+      margin-left:8px;
+      box-shadow:0 0 0 1px #30343a;
+    }
+    .photo::before{
+      content:"</>";
+      color:var(--green);
+      font-size:62px;
+      font-weight:900;
+      letter-spacing:-.15em;
+      transform:translateX(-6px);
+    }
+    .bubble{display:none}
+    .head{display:flex;align-items:center;gap:16px;margin-top:8px;margin-bottom:20px}
+    .username{font-size:25px;font-weight:700;letter-spacing:-.02em}
+    .verify{width:22px;height:22px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-size:13px}
+    .counts{display:flex;gap:28px;margin-bottom:20px;font-size:16px}
+    .counts b{font-weight:700}
+    .name{font-size:16px;margin-bottom:18px}.bio{font-size:16px;color:#f2f2f2}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:42px;max-width:690px}
+    button{border:0;border-radius:8px;background:var(--button);color:#fff;font-weight:700;font-size:14px;padding:9px 16px;cursor:pointer}
+    button:hover{background:var(--button-hover)}
+    .follow{background:var(--blue);padding:9px 22px}.follow:hover{background:#1877f2}.msgbtn{padding:9px 18px}.smallbtn{width:34px;padding:9px 0}.dots{font-size:22px;font-weight:800;line-height:1}.link{color:#b7ddff}.actions{display:none}
+    .highlights{display:flex;gap:34px;align-items:start;margin:0 0 34px 20px}
+    .hl{text-align:center;font-size:13px;font-weight:700;color:#fff;width:78px}
+    .circle{width:82px;height:82px;border-radius:50%;background:#111;border:1px solid #484848;padding:6px;margin-bottom:10px;display:grid;place-items:center;overflow:hidden}
+    .circle span{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:#0b1114;color:var(--green);font-size:34px;font-weight:800}
+    .circle.tech span{font-family:Arial, sans-serif}
+    .tabs{height:52px;border-top:1px solid var(--line);display:flex;justify-content:center;gap:175px;color:#8d8d8d;align-items:center}.tabs .active{color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.post{aspect-ratio:1/1;background-image:var(--tile);background-size:300% 100%;background-repeat:no-repeat;position:relative;overflow:hidden}.post:nth-child(1){background-position:0 center}.post:nth-child(2){background-position:50% center}.post:nth-child(3){background-position:100% center}.stack{position:absolute;right:12px;top:12px;font-size:24px;text-shadow:0 2px 6px #000}
+    .chat{position:fixed;right:26px;bottom:26px;background:#20242b;border-radius:24px;padding:18px 24px;display:flex;gap:12px;align-items:center;font-weight:800;font-size:17px;box-shadow:0 8px 34px #0008}.badge{position:absolute;left:-8px;top:-8px;background:#ff3040;color:#fff;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px}
+    @media(max-width:900px){.sidebar{width:76px}.brand,.nav span.txt,.more span.txt{display:none}.main{margin-left:76px;width:calc(100% - 76px)}.profile{padding:0 18px}.profile-top{grid-template-columns:110px 1fr;gap:22px}.photo{width:96px;height:96px}.tabs{gap:70px}.highlights{gap:18px;overflow:auto}.actions{margin-top:22px}.counts{gap:14px;flex-wrap:wrap}.username{font-size:21px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div>
+        <div class="brand">Instagram</div>
+        <nav class="nav">
+          <a href="#"><span class="ico">⌂</span><span class="txt">Início</span></a>
+          <a href="#"><span class="ico">⌕</span><span class="txt">Pesquisa</span></a>
+          <a href="#"><span class="ico">⊙</span><span class="txt">Explorar</span></a>
+          <a href="#"><span class="ico">▻</span><span class="txt">Reels</span></a>
+          <a href="#"><span class="ico">♡</span><span class="txt">Notificações</span></a>
+          <a href="#"><span class="ico">＋</span><span class="txt">Criar</span></a>
+          <a href="#"><span class="avatar-mini">A</span><span class="txt">Perfil</span></a>
+        </nav>
+      </div>
+      <div class="more"><span class="ico">☰</span><span class="txt">Mais</span></div>
+    </aside>
+
+    <main class="main">
+      <section class="profile">
+        <div class="profile-top">
+          <div class="photo"></div>
+          <div>
+            <div class="head">
+              <div class="username">dev.infra</div>
+              <button class="follow">Seguir</button>
+              <button class="msgbtn">Enviar mensagem</button>
+              <button class="smallbtn">⌘</button>
+              <div class="dots">•••</div>
+            </div>
+            <div class="counts"><span><b>128</b> publicações</span><span><b>2.458</b> seguidores</span><span><b>following</b> 312</span></div>
+            <div class="name"><b>Dev & Infra</b></div>
+            <div class="bio">Infraestrutura | Desenvolvimento | Observabilidade<br>Compartilhando conhecimento para construir soluções<br>escaláveis e confiáveis.<br><b class="link">🔗 linktr.ee/dev.infra</b></div>
+          </div>
+        </div>
+
+        <div class="highlights">
+          <div class="hl"><div class="circle tech"><span>☁</span></div>Infra</div>
+          <div class="hl"><div class="circle tech"><span>&lt;/&gt;</span></div>Dev</div>
+          <div class="hl"><div class="circle tech"><span>◎</span></div>Observability</div>
+          <div class="hl"><div class="circle tech"><span>🛠</span></div>Ferramentas</div>
+          <div class="hl"><div class="circle tech"><span>💡</span></div>Dicas</div>
+        </div>
+
+        <div class="tabs"><div class="active">▦</div><div>▻</div><div>▱</div><div>▢</div></div>
+
+        <div class="grid" aria-label="Feed com imagem panorâmica dividida em 3 publicações">
+          <article class="post" style="background-image: url('file:///Users/ti/Downloads/post_1_clean.png'); background-size: cover; background-position: center;"><span class="stack">▣</span></article>
+
+          <article class="post" style="background-image: url('file:///Users/ti/Downloads/post_2_clean.png'); background-size: cover; background-position: center;"><span class="stack">▣</span></article>
+
+          <article class="post" style="background-image: url('file:///Users/ti/Downloads/post_3_clean.png'); background-size: cover; background-position: center;"><span class="stack">▣</span></article>
+        </div>
+      </section>
+    </main>
+
+    <div class="chat"><span class="badge">1</span>♡ Mensagens <span class="avatar-mini">A</span></div>
+  </div>
+</body>
+</html>
